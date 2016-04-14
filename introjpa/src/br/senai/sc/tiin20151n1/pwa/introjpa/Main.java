@@ -22,6 +22,8 @@ public class Main {
 //		listarAlunos();
 //		buscarAlunoPorId();
 		removerAlunoPorId();
+		
+		emf.close();
 	}
 
 	private static void removerAlunoPorId() {
