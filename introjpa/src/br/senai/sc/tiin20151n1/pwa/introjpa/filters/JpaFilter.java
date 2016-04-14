@@ -2,6 +2,7 @@ package br.senai.sc.tiin20151n1.pwa.introjpa.filters;
 
 import java.io.IOException;
 
+import javax.persistence.EntityManager;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -12,7 +13,7 @@ import javax.servlet.annotation.WebFilter;
 
 import br.senai.sc.tiin20151n1.pwa.introjpa.commons.JpaUtil;
 
-@WebFilter(urlPatterns="*.xhtml")
+@WebFilter(servletNames="Faces Servlet")
 public class JpaFilter implements Filter {
 
 	@Override
@@ -28,6 +29,13 @@ public class JpaFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain filterChain) throws IOException, ServletException {
+		
+		EntityManager entityManager = JpaUtil.createEntityManager(request);
+		entityManager.getTransaction().begin();
+		
 		filterChain.doFilter(request, response);
+		
+		entityManager.getTransaction().commit();
+		entityManager.close();
 	}
 }
