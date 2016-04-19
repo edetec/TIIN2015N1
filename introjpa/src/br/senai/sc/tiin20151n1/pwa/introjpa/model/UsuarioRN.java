@@ -15,4 +15,8 @@ public class UsuarioRN {
 		dao.salvar(usuario);
 	}
 
+	public Usuario buscarPorId(Long id) {
+		return dao.buscarPorId(id);
+	}
+
 }

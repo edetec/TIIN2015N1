@@ -12,4 +12,9 @@ public class UsuarioDAO {
 		em.merge(usuario);
 	}
 
+	public Usuario buscarPorId(Long id) {
+		EntityManager em = JpaUtil.getEntityManager();
+		return em.find(Usuario.class, id);
+	}
+
 }
