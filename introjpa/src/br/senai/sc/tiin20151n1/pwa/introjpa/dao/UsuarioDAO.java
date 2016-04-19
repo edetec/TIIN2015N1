@@ -11,19 +11,26 @@ import br.senai.sc.tiin20151n1.pwa.introjpa.model.entity.Usuario;
 public class UsuarioDAO {
 
 	public void salvar(Usuario usuario) {
-		EntityManager em = JpaUtil.getEntityManager();
-		em.merge(usuario);
+		getEM().merge(usuario);
 	}
 
 	public Usuario buscarPorId(Long id) {
-		EntityManager em = JpaUtil.getEntityManager();
-		return em.find(Usuario.class, id);
+		return getEM().find(Usuario.class, id);
 	}
 
 	public List<Usuario> listarUsuarios() {
-		EntityManager em = JpaUtil.getEntityManager();
-		Query query = em.createQuery("From Usuario", Usuario.class);
+		Query query = getEM().createQuery("From Usuario", Usuario.class);
 		return query.getResultList();
+	}
+
+	public void excluir(Long id) {
+		Usuario usuario = getEM().getReference(Usuario.class, id);
+		getEM().remove(usuario);
+	}
+
+	private EntityManager getEM() {
+		EntityManager em = JpaUtil.getEntityManager();
+		return em;
 	}
 
 }

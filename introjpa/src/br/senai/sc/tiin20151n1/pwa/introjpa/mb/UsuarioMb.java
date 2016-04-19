@@ -58,8 +58,16 @@ public class UsuarioMb {
 		usuario = usuarioRN.buscarPorId(editarId);
 	}
 	
+	public String excluir(String id){
+		Long idExcluir = Long.parseLong(id);
+		usuarioRN.excluir(idExcluir);
+		listaUsuarios = null;
+		return "";
+	}
+	
 	public String salvar(){
 		usuarioRN.salvar(usuario);
+		listaUsuarios = null;
 		return "";
 	}
 	

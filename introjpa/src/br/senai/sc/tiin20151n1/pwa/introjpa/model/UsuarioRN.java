@@ -25,4 +25,8 @@ public class UsuarioRN {
 		return dao.listarUsuarios();
 	}
 
+	public void excluir(Long id) {
+		dao.excluir(id);
+	}
+
 }
