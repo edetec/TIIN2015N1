@@ -3,6 +3,7 @@ package br.senai.sc.tiin20151n1.pwa.introjpa.model.entity;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Usuario {
@@ -12,6 +13,9 @@ public class Usuario {
 	private String nome;
 	private String email;
 	private String senha;
+
+	@ManyToOne
+	private PerfilAcesso perfilAcesso;
 
 	public Long getId() {
 		return id;
@@ -43,5 +47,13 @@ public class Usuario {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+
+	public PerfilAcesso getPerfilAcesso() {
+		return perfilAcesso;
+	}
+
+	public void setPerfilAcesso(PerfilAcesso perfilAcesso) {
+		this.perfilAcesso = perfilAcesso;
 	}
 }

@@ -34,6 +34,14 @@
 						value="#{usuarioMb.usuario.nome}" id="exampleInputNome" />
 				</div>
 				<div class="form-group">
+					<label for="exampleInputPerfil">Perfil de Acesso</label>
+					<h:selectOneMenu styleClass="form-control" value="#{usuarioMb.usuario.perfilAcesso}">
+						<f:selectItem itemLabel="-" itemValue="" />
+						<f:selectItems value="#{usuarioMb.listaPerfis}" var="perfil" 
+						itemLabel="#{perfil.nome}" itemValue="#{perfil}" />
+					</h:selectOneMenu>
+				</div>
+				<div class="form-group">
 					<label for="exampleInputEmail1">Email address</label>
 					<h:inputText styleClass="form-control" id="exampleInputEmail1"
 						value="#{usuarioMb.usuario.email}" />

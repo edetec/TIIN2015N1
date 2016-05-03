@@ -6,7 +6,9 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.event.ComponentSystemEvent;
 
+import br.senai.sc.tiin20151n1.pwa.introjpa.model.PerfilAcessoRN;
 import br.senai.sc.tiin20151n1.pwa.introjpa.model.UsuarioRN;
+import br.senai.sc.tiin20151n1.pwa.introjpa.model.entity.PerfilAcesso;
 import br.senai.sc.tiin20151n1.pwa.introjpa.model.entity.Usuario;
 
 @ManagedBean
@@ -15,11 +17,14 @@ public class UsuarioMb {
 	private UsuarioRN usuarioRN;
 	private Long editarId;
 	private List<Usuario> listaUsuarios;
+	private List<PerfilAcesso> listaPerfis;
+	private PerfilAcessoRN perfilAcessoRN;
 	
 	@PostConstruct
 	public void depoisDeConstruir(){
 		usuario = new Usuario();
 		usuarioRN = new UsuarioRN();
+		perfilAcessoRN = new PerfilAcessoRN();
 	}
 
 	public Usuario getUsuario() {
@@ -50,6 +55,17 @@ public class UsuarioMb {
 		this.listaUsuarios = listaUsuarios;
 	}
 
+	public List<PerfilAcesso> getListaPerfis() {
+		if(listaPerfis == null){
+			listaPerfis = perfilAcessoRN.listar();
+		}
+		return listaPerfis;
+	}
+
+	public void setListaPerfis(List<PerfilAcesso> listaPerfis) {
+		this.listaPerfis = listaPerfis;
+	}
+
 	public void carregarUsuario(ComponentSystemEvent event){
 		if(editarId == null){
 			return ;
@@ -65,10 +81,15 @@ public class UsuarioMb {
 		return "";
 	}
 	
+//	public String salvar(){
+//		usuarioRN.salvar(usuario);
+//		usuario = new Usuario();
+//		return "";
+//	}
+	
 	public String salvar(){
 		usuarioRN.salvar(usuario);
 		listaUsuarios = null;
-		return "";
+		return "/userList";
 	}
-	
 }
