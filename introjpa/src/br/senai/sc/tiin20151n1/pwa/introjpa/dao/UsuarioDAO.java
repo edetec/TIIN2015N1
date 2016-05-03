@@ -2,13 +2,11 @@ package br.senai.sc.tiin20151n1.pwa.introjpa.dao;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import br.senai.sc.tiin20151n1.pwa.introjpa.commons.JpaUtil;
 import br.senai.sc.tiin20151n1.pwa.introjpa.model.entity.Usuario;
 
-public class UsuarioDAO {
+public class UsuarioDAO extends DAO {
 
 	public void salvar(Usuario usuario) {
 		getEM().merge(usuario);
@@ -26,11 +24,6 @@ public class UsuarioDAO {
 	public void excluir(Long id) {
 		Usuario usuario = getEM().getReference(Usuario.class, id);
 		getEM().remove(usuario);
-	}
-
-	private EntityManager getEM() {
-		EntityManager em = JpaUtil.getEntityManager();
-		return em;
 	}
 
 }
