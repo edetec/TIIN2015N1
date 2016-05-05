@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/WEB-INF/template/padrao.xhtml">
+	<ui:define name="conteudo">
+		<div class="page-header">
+			<h1>Escursões</h1>
+			<h:link outcome="/escursao" styleClass="btn btn-success">
+				<span class="glyphicon glyphicon-plus"></span>
+			</h:link>
+			<h:dataTable styleClass="table" value="#{escursaoMb.listaEscursao}" var="escursao" >
+				<h:column>
+					<f:facet name="header">ID</f:facet>
+					<h:outputText value="#{escursao.id}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Destino</f:facet>
+					<h:outputText value="#{escursao.destino}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Partida</f:facet>
+					<h:outputText value="#{escursao.dataPartida}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Retorno</f:facet>
+					<h:outputText value="#{escursao.dataRetorno}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Valor</f:facet>
+					<h:outputText value="#{escursao.valor}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Agente</f:facet>
+					<h:outputText value="#{escursao.agente}" />
+				</h:column>
+			</h:dataTable>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>
