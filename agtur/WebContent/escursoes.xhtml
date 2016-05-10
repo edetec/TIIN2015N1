@@ -13,7 +13,9 @@
 			<h:link outcome="/escursao" styleClass="btn btn-success">
 				<span class="glyphicon glyphicon-plus"></span>
 			</h:link>
-			<h:dataTable styleClass="table" value="#{escursaoMb.listaEscursao}" var="escursao" >
+			<h:messages />
+			<h:dataTable styleClass="table" value="#{escursaoMb.listaEscursao}"
+				var="escursao">
 				<h:column>
 					<f:facet name="header">ID</f:facet>
 					<h:outputText value="#{escursao.id}" />
@@ -24,11 +26,15 @@
 				</h:column>
 				<h:column>
 					<f:facet name="header">Partida</f:facet>
-					<h:outputText value="#{escursao.dataPartida}" />
+					<h:outputText value="#{escursao.partida}">
+						<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+					</h:outputText>
 				</h:column>
 				<h:column>
 					<f:facet name="header">Retorno</f:facet>
-					<h:outputText value="#{escursao.dataRetorno}" />
+					<h:outputText value="#{escursao.retorno}">
+						<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+					</h:outputText>
 				</h:column>
 				<h:column>
 					<f:facet name="header">Valor</f:facet>
