@@ -9,6 +9,7 @@
 <ui:composition template="/WEB-INF/template/padrao.xhtml">
 	<ui:define name="conteudo">
 	    <h1>Escursão <small>Nova</small></h1>
+	    <h:messages />
 	    <h:form>
 	    	<h:panelGroup rendered="#{not empty escursaoMb.escursao.id}">
 					<div class="form-group id">
@@ -34,22 +35,37 @@
 				</div>
 				<div class="form-group">
 					<label>Partida</label>
-					<h:inputText styleClass="form-control"
-						value="#{escursaoMb.escursao.partida}">
-						<f:passThroughAttribute name="type" value="datetime-local" />
-					</h:inputText>
+					<div class='input-group date datetimepicker'>
+						<h:inputText styleClass="form-control"
+							value="#{escursaoMb.escursao.partida}">
+							<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+						</h:inputText>
+						<span class="input-group-addon">
+	                        <span class="glyphicon glyphicon-calendar"></span>
+	                    </span>
+                    </div>
 				</div>
 				<div class="form-group">
 					<label>Retorno</label>
-					<h:inputText styleClass="form-control"
-						value="#{escursaoMb.escursao.retorno}" />
+					<div class='input-group date datetimepicker'>
+						<h:inputText styleClass="form-control"
+							value="#{escursaoMb.escursao.retorno}">
+							<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+						</h:inputText>
+						<span class="input-group-addon">
+	                        <span class="glyphicon glyphicon-calendar"></span>
+	                    </span>
+                    </div>
 				</div>
 				<div class="form-group">
 					<label>Valor</label>
 					<h:inputText styleClass="form-control"
 						value="#{escursaoMb.escursao.valor}" />
 				</div>
+				<button class="btn btn-default">Restaurar</button>
+				<h:commandButton action="#{escursaoMb.salvar}" value="Salvar" styleClass="btn btn-primary" />
 	    </h:form>
+		<h:outputScript name="/js/datepicker-component.js" />
 	</ui:define>
 </ui:composition>
 </html>
