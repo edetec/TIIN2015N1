@@ -34,4 +34,8 @@ public class EscursaoRN {
 					+ "o banco de dados. Contate o administrador do site.");
 		}
 	}
+
+	public Escursao buscarPorId(Long id) {
+		return dao.buscarPorId(id);
+	}
 }

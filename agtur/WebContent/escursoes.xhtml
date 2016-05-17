@@ -42,7 +42,13 @@
 				</h:column>
 				<h:column>
 					<f:facet name="header">Agente</f:facet>
-					<h:outputText value="#{escursao.agente}" />
+					<h:outputText value="#{escursao.agente.nome}" />
+				</h:column>
+				<h:column>
+					<h:link styleClass="btn btn-default" outcome="/escursao"
+						value="Editar">
+						<f:param name="id" value="#{escursao.id}" />
+					</h:link>
 				</h:column>
 			</h:dataTable>
 		</div>

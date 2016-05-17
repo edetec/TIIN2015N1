@@ -18,4 +18,8 @@ public class EscursaoDAO extends DAO {
 		getEM().merge(escursao);
 	}
 
+	public Escursao buscarPorId(Long id) {
+		return getEM().find(Escursao.class, id);
+	}
+
 }

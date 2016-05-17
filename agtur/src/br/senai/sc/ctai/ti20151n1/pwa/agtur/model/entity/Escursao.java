@@ -1,10 +1,13 @@
 package br.senai.sc.ctai.ti20151n1.pwa.agtur.model.entity;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -19,6 +22,8 @@ public class Escursao {
 	private Float valor;
 	@ManyToOne
 	private Usuario agente;
+	@ManyToMany
+	private List<Usuario> clientesEscursao;
 
 	public Long getId() {
 		return id;
@@ -66,6 +71,14 @@ public class Escursao {
 
 	public void setAgente(Usuario agente) {
 		this.agente = agente;
+	}
+
+	public List<Usuario> getClientesEscursao() {
+		return clientesEscursao;
+	}
+
+	public void setClientesEscursao(List<Usuario> clientesEscursao) {
+		this.clientesEscursao = clientesEscursao;
 	}
 
 }
