@@ -75,9 +75,8 @@
 								<f:facet name="header">controle</f:facet>
 								<h:commandLink>
 									<f:attribute name="idCliente" value="#{cliente}" />
-									<f:ajax event="click" render="uiClientesEscursao"
-									listener="#{escursaoMb.excluirCliente}">
-									</f:ajax>
+									<f:ajax event="click" execute="@form" render="@form"
+									listener="#{escursaoMb.excluirCliente}"/>
 									<span class="glyphicon glyphicon-remove-circle"></span>
 								</h:commandLink> 
 							</h:column>
