@@ -38,4 +38,8 @@ public class EscursaoRN {
 	public Escursao buscarPorId(Long id) {
 		return dao.buscarPorId(id);
 	}
+
+	public void excluir(Long id) {
+		dao.excluir(id);
+	}
 }

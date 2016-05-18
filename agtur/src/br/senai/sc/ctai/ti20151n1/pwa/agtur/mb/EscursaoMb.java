@@ -89,6 +89,14 @@ public class EscursaoMb {
 				.get("idCliente");
 		escursao.getClientesEscursao().remove(cliente);
 	}
+	
+	public String excluir(String idParam){
+		Long id = Long.parseLong(idParam);
+		escursaoRN.excluir(id);
+		listaEscursao = null;
+		
+		return "";
+	}
 
 	public String salvar() throws Throwable {
 		try {

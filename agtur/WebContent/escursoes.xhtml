@@ -14,43 +14,50 @@
 				<span class="glyphicon glyphicon-plus"></span>
 			</h:link>
 			<h:messages />
-			<h:dataTable styleClass="table" value="#{escursaoMb.listaEscursao}"
-				var="escursao">
-				<h:column>
-					<f:facet name="header">ID</f:facet>
-					<h:outputText value="#{escursao.id}" />
-				</h:column>
-				<h:column>
-					<f:facet name="header">Destino</f:facet>
-					<h:outputText value="#{escursao.destino}" />
-				</h:column>
-				<h:column>
-					<f:facet name="header">Partida</f:facet>
-					<h:outputText value="#{escursao.partida}">
-						<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
-					</h:outputText>
-				</h:column>
-				<h:column>
-					<f:facet name="header">Retorno</f:facet>
-					<h:outputText value="#{escursao.retorno}">
-						<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
-					</h:outputText>
-				</h:column>
-				<h:column>
-					<f:facet name="header">Valor</f:facet>
-					<h:outputText value="#{escursao.valor}" />
-				</h:column>
-				<h:column>
-					<f:facet name="header">Agente</f:facet>
-					<h:outputText value="#{escursao.agente.nome}" />
-				</h:column>
-				<h:column>
-					<h:link styleClass="btn btn-default" outcome="/escursao"
-						value="Editar">
-						<f:param name="id" value="#{escursao.id}" />
-					</h:link>
-				</h:column>
-			</h:dataTable>
+			<h:form>
+				<h:dataTable styleClass="table" value="#{escursaoMb.listaEscursao}"
+					var="escursao">
+					<h:column>
+						<f:facet name="header">ID</f:facet>
+						<h:outputText value="#{escursao.id}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">Destino</f:facet>
+						<h:outputText value="#{escursao.destino}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">Partida</f:facet>
+						<h:outputText value="#{escursao.partida}">
+							<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+						</h:outputText>
+					</h:column>
+					<h:column>
+						<f:facet name="header">Retorno</f:facet>
+						<h:outputText value="#{escursao.retorno}">
+							<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+						</h:outputText>
+					</h:column>
+					<h:column>
+						<f:facet name="header">Valor</f:facet>
+						<h:outputText value="#{escursao.valor}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">Agente</f:facet>
+						<h:outputText value="#{escursao.agente.nome}" />
+					</h:column>
+					<h:column>
+						<span> <h:link styleClass="btn btn-default"
+								outcome="/escursao" value="Editar">
+								<f:param name="id" value="#{escursao.id}" />
+							</h:link>
+						</span>
+						<span> <h:commandLink styleClass="btn btn-warning"
+								action="#{escursaoMb.excluir(escursao.id)}" value="Excluir"
+								onclick="return confirm('Tem certeza da exclusão da escurção para #{escursao.destino}')" />
+						</span>
+					</h:column>
+				</h:dataTable>
+			</h:form>
 		</div>
 	</ui:define>
 </ui:composition>

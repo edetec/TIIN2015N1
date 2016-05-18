@@ -22,4 +22,9 @@ public class EscursaoDAO extends DAO {
 		return getEM().find(Escursao.class, id);
 	}
 
+	public void excluir(Long id) {
+		Escursao escursao = getEM().getReference(Escursao.class, id);
+		getEM().remove(escursao);
+	}
+
 }
