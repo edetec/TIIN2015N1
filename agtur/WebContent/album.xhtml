@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<f:metadata>
+	<f:viewParam name="idescursao" value="#{albumMb.escursao}" />
+</f:metadata>
+
+<ui:composition template="/WEB-INF/template/padrao.xhtml">
+	<ui:define name="conteudo">
+		<div class="row">
+			<div>
+				<b>Destino: </b>
+				<h:outputText value="#{albumMb.escursao.destino}" />
+			</div>
+			<div>
+				<b>Partida: </b>
+				<h:outputText value="#{albumMb.escursao.partida}">
+					<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+				</h:outputText>
+			</div>
+			<div>
+				<b>Retorno: </b>
+				<h:outputText value="#{albumMb.escursao.retorno}">
+					<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+				</h:outputText>
+			</div>
+		</div>
+		<div class="row">
+			<h:link outcome="/enviarfoto" styleClass="btn btn-success">
+				<f:param name="idescursao" value="#{albumMb.escursao.id}" />
+				<span class="glyphicon glyphicon-plus"></span>
+			</h:link>
+			<h:form>
+				<h:dataTable styleClass="table" value="#{albumMb.imagens}"
+					var="file">
+					<h:column>
+						<h:outputText value="#{file.data}" />
+					</h:column>
+					<h:column>
+						<h:graphicImage styleClass="img-thumbnail"
+							name="img/uploads/#{file.nome}" />
+					</h:column>
+					<h:column>
+						<span> <h:link styleClass="btn btn-warning"
+								outcome="/enviarfoto">
+								<f:param name="idimagem" value="#{file.id}" />
+								<f:param name="idescursao" value="#{albumMb.escursao.id}" />
+
+								<span class="glyphicon glyphicon-pencil"></span>
+							</h:link>
+						</span>
+						<span> <h:commandLink styleClass="btn btn-warning"
+								onclick="return confirm('Tem certeza da exclusão da foto: #{file.nome}')">
+								<f:attribute name="idImagem" value="#{file.id}" />
+								<f:ajax listener="#{albumMb.excluir}" render="@form" />
+								<span class="glyphicon glyphicon-trash"></span>
+							</h:commandLink>
+						</span>
+					</h:column>
+				</h:dataTable>
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

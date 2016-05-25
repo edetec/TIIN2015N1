@@ -47,13 +47,22 @@
 					</h:column>
 					<h:column>
 						<span> <h:link styleClass="btn btn-default"
-								outcome="/escursao" value="Editar">
+								outcome="/album">
+								<span class="glyphicon glyphicon-picture"></span>
+								<f:param name="idescursao" value="#{escursao.id}" />
+							</h:link>
+						</span>
+						<span> <h:link styleClass="btn btn-default"
+								outcome="/escursao">
+								<span class="glyphicon glyphicon-pencil"></span>
 								<f:param name="id" value="#{escursao.id}" />
 							</h:link>
 						</span>
 						<span> <h:commandLink styleClass="btn btn-warning"
-								action="#{escursaoMb.excluir(escursao.id)}" value="Excluir"
-								onclick="return confirm('Tem certeza da exclusão da escurção para #{escursao.destino}')" />
+								action="#{escursaoMb.excluir(escursao.id)}"
+								onclick="return confirm('Tem certeza da exclusão da escurção para #{escursao.destino}')">
+								<span class="glyphicon glyphicon-trash"></span>
+								 </h:commandLink>
 						</span>
 					</h:column>
 				</h:dataTable>

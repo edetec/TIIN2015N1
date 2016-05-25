@@ -15,7 +15,7 @@ import br.senai.sc.ctai.ti20151n1.pwa.agtur.model.entity.Usuario;
 import br.senai.sc.ctai.ti20151n1.pwa.agtur.model.rn.EscursaoRN;
 
 @ViewScoped
-@ManagedBean
+@ManagedBean(name="escursaoMb")
 public class EscursaoMb {
 
 	private List<Escursao> listaEscursao;
