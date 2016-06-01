@@ -156,8 +156,13 @@
 				<ui:insert name="col_direita">
 					<h2>Próxima escurções</h2>
 					<div class="list-group">
-						<a href="#" class="list-group-item active">Buenos Aires</a> <a
-							href="#" class="list-group-item">Puerto Iguaçu</a>
+						
+						<ui:repeat var="escursao" value="#{escursaoMb.listaEscursao}">
+							<a href="#" class="list-group-item">
+								<h:outputText value="#{escursao.destino}" />
+							</a>
+						</ui:repeat>
+						
 					</div>
 				</ui:insert>
 			</div>
