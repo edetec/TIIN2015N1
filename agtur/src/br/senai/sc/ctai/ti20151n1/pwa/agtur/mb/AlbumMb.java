@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.event.AjaxBehaviorEvent;
+import javax.faces.bean.ViewScoped;
 import javax.servlet.http.Part;
 
 import br.senai.sc.ctai.ti20151n1.pwa.agtur.commons.UploadUtil;
@@ -14,30 +14,25 @@ import br.senai.sc.ctai.ti20151n1.pwa.agtur.model.entity.Imagem;
 import br.senai.sc.ctai.ti20151n1.pwa.agtur.model.rn.AlbumRN;
 import br.senai.sc.ctai.ti20151n1.pwa.agtur.model.rn.EscursaoRN;
 
-@ManagedBean(name="albumMb")
+@ViewScoped
+@ManagedBean(name = "albumMb")
 public class AlbumMb {
 
-	private Long escursaoId;
+	private String escursaoId;
 	private Escursao escursao;
-	private Part fotoUploaded;
 	private Imagem foto;
+	
+	private Part fotoUploaded;
 	private List<Imagem> imagens;
 	private AlbumRN albumRN;
 	private EscursaoRN escursaoRN;
 
 	@PostConstruct
-	public void init(){
+	public void init() {
 		escursaoRN = new EscursaoRN();
 		albumRN = new AlbumRN();
 		foto = new Imagem();
-	}
-	
-	public Long getEscursaoId() {
-		return escursaoId;
-	}
-
-	public void setEscursaoId(Long escursaoId) {
-		this.escursaoId = escursaoId;
+		escursao = new Escursao();
 	}
 
 	public Escursao getEscursao() {
@@ -49,7 +44,7 @@ public class AlbumMb {
 	}
 
 	public List<Imagem> getImagens() {
-		if(imagens == null && escursao != null){
+		if (imagens == null && escursao != null && escursao.getId() != null) {
 			imagens = albumRN.listarImagensPorEscursao(escursao.getId());
 		}
 		return imagens;
@@ -75,33 +70,42 @@ public class AlbumMb {
 		this.fotoUploaded = fotoUploaded;
 	}
 
-	public void carregarEscursao() {
-		escursao = escursaoRN.buscarPorId(escursaoId);
+	public String getEscursaoId() {
+		return escursaoId;
+	}
+
+	public void setEscursaoId(String escursaoId) {
+		this.escursaoId = escursaoId;
+	}
+
+	public void load(){
+		if(escursaoId != null){
+			Long id = Long.parseLong(escursaoId);
+			escursao = escursaoRN.buscarPorId(id );
+		}
 	}
 	
-	public void excluir(AjaxBehaviorEvent event){
-		
-		Long idImagem = (Long) event.getComponent().getAttributes().get("idImagem");
-		
-		Imagem img = albumRN.buscarImagemPorId(idImagem);
+	public void excluir(String idImg){
+		Long id = Long.parseLong(idImg);
+		Imagem img = albumRN.buscarImagemPorId(id);
 		
 		UploadUtil.removerArquivo(img.getNome());
 		albumRN.excluir(img);
 		
 		imagens = null;
-		
 	}
-	
-	public String salvar(){
+
+	public String salvar() {
 		try {
 			String nome = UploadUtil.moverArquivo(fotoUploaded, foto.getNome());
-			
+
 			foto.setNome(nome);
 			foto.setEscursao(escursao);
-			
+
 			albumRN.adicionar(foto);
-			
-			return "/album?idescursao=" + escursao.getId().toString() + "&faces-redirect=true";
+
+			return "/album?idescursao=" + escursao.getId().toString()
+					+ "&faces-redirect=true";
 		} catch (IOException e) {
 			e.printStackTrace();
 			return "";

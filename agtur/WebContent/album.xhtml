@@ -7,7 +7,8 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 
 <f:metadata>
-	<f:viewParam name="idescursao" value="#{albumMb.escursao}" />
+	<f:viewParam name="idescursao" value="#{albumMb.escursaoId}" />
+	<f:event listener="#{albumMb.load}" type="preRenderView" />
 </f:metadata>
 
 <ui:composition template="/WEB-INF/template/padrao.xhtml">
@@ -43,6 +44,7 @@
 					</h:column>
 					<h:column>
 						<h:graphicImage styleClass="img-thumbnail"
+							style="height:100px;"
 							name="img/uploads/#{file.nome}" />
 					</h:column>
 					<h:column>
@@ -55,9 +57,9 @@
 							</h:link>
 						</span>
 						<span> <h:commandLink styleClass="btn btn-warning"
+								action="#{albumMb.excluir(file.id)}"
 								onclick="return confirm('Tem certeza da exclusão da foto: #{file.nome}')">
-								<f:attribute name="idImagem" value="#{file.id}" />
-								<f:ajax listener="#{albumMb.excluir}" render="@form" />
+								<f:ajax render="@form" />
 								<span class="glyphicon glyphicon-trash"></span>
 							</h:commandLink>
 						</span>

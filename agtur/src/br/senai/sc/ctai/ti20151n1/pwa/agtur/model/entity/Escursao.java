@@ -1,5 +1,6 @@
 package br.senai.sc.ctai.ti20151n1.pwa.agtur.model.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -11,8 +12,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Escursao {
+public class Escursao implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue
 	private Long id;

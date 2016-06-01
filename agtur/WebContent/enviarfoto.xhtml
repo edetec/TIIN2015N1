@@ -6,7 +6,9 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core">
 <f:metadata>
-	<f:viewParam name="idescursao" value="#{albumMb.escursao}" />
+	<f:viewParam name="idescursao" value="#{albumMb.escursao}"
+		required="true"
+		requiredMessage="Clique no botão adicionar do album de uma escursão" />
 	<f:viewParam name="idimagem" value="#{albumMb.foto}" />
 </f:metadata>
 <ui:composition template="/WEB-INF/template/padrao.xhtml">
@@ -25,8 +27,7 @@
 			<div class="form-group">
 				<label>Data</label>
 				<div class='input-group date datetimepicker'>
-					<h:inputText styleClass="form-control"
-						value="#{albumMb.foto.data}">
+					<h:inputText styleClass="form-control" value="#{albumMb.foto.data}">
 						<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
 					</h:inputText>
 					<span class="input-group-addon"> <span
@@ -34,20 +35,19 @@
 					</span>
 				</div>
 			</div>
-			
+
 			<div class="form-group">
 				<label>Foto</label>
 				<h:inputFile styleClass="form-control"
 					value="#{albumMb.fotoUploaded}" />
 			</div>
 			<h:graphicImage rendered="#{not empty albumMb.foto.nome}"
-			styleClass="img-responsive"
-				name="img/uploads/#{albumMb.foto.nome}" />
+				styleClass="img-responsive" name="img/uploads/#{albumMb.foto.nome}" />
 			<div>
 				<h:commandButton action="#{albumMb.salvar}" value="Salvar" />
 			</div>
 		</h:form>
-		
+
 		<h:outputScript name="/js/datepicker-component.js" />
 	</ui:define>
 </ui:composition>
