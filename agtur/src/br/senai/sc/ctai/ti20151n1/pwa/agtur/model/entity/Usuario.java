@@ -2,6 +2,7 @@ package br.senai.sc.ctai.ti20151n1.pwa.agtur.model.entity;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -18,6 +19,7 @@ public class Usuario {
 	private String nome;
 	private Date nascimento;
 	private String telefone;
+	@Column(unique=true)
 	private String email;
 	private String senha;
 

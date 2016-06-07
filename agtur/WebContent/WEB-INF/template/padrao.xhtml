@@ -9,14 +9,15 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<title><ui:insert name="title">Default title</ui:insert></title>
 	<h:outputStylesheet name="/libs/bootstrap/css/bootstrap.css" />
-	<h:outputStylesheet name="/libs/bootstrap-datepicker/bootstrap-datetimepicker.css" />
+	<h:outputStylesheet
+		name="/libs/bootstrap-datepicker/bootstrap-datetimepicker.css" />
 	<h:outputStylesheet name="/libs/bootstrap/template/offcanvas.css" />
-	
+
 	<h:outputScript name="/libs/jquery.min.js" />
 </h:head>
 
 <h:body>
-	<ui:debug/>
+	<ui:debug />
 	<nav class="navbar navbar-fixed-top navbar-inverse">
 	<div class="container">
 		<div class="navbar-header">
@@ -34,16 +35,28 @@
 				<li><h:link outcome="/index" value="Início" /></li>
 				<li><h:link outcome="/contato" value="Contato" /></li>
 			</ul>
-			<ul class="nav navbar-nav navbar-right">
-				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown" role="button" aria-haspopup="true"
-					aria-expanded="false">Administrar <span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li><h:link outcome="/escursoes" value="Escursões" /></li>
-						<li role="separator" class="divider"></li>
-						<li><h:link outcome="/usuarios" value="Usuários" /></li>
-					</ul></li>
-			</ul>
+			<h:form>
+				<ul class="nav navbar-nav navbar-right">
+					<h:panelGroup rendered="#{sessaoMb.estaLogado()}">
+						<li class="dropdown"><a href="#" class="dropdown-toggle"
+							data-toggle="dropdown" role="button" aria-haspopup="true"
+							aria-expanded="false">
+								<span class="glyphicon glyphicon-user"></span> - <h:outputText value="#{sessaoMb.nomeUsuarioLogato}"/> <span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu">
+								<li><h:link outcome="/admin/escursoes" value="Escursões" /></li>
+								<li role="separator" class="divider"></li>
+								<li><h:link outcome="/admin/usuarios" value="Usuários" /></li>
+								<li><h:commandLink action="#{sessaoMb.sair}" value="Sair"
+										styleClass="btn btn-danger" /></li>
+							</ul></li>
+					</h:panelGroup>
+					<h:panelGroup rendered="#{not sessaoMb.estaLogado()}">
+						<li><h:link value="Entrar" outcome="/login"
+								styleClass="btn btn-success" /></li>
+					</h:panelGroup>
+				</ul>
+			</h:form>
 		</div>
 		<!-- /.nav-collapse -->
 	</div>
@@ -156,13 +169,13 @@
 				<ui:insert name="col_direita">
 					<h2>Próxima escurções</h2>
 					<div class="list-group">
-						
+
 						<ui:repeat var="escursao" value="#{escursaoMb.listaEscursao}">
-							<a href="#" class="list-group-item">
-								<h:outputText value="#{escursao.destino}" />
+							<a href="#" class="list-group-item"> <h:outputText
+									value="#{escursao.destino}" />
 							</a>
 						</ui:repeat>
-						
+
 					</div>
 				</ui:insert>
 			</div>
@@ -182,7 +195,8 @@
 	<h:outputScript name="/libs/moment-with-locales.js" />
 	<h:outputScript name="/js/menu.js" />
 	<h:outputScript name="/libs/bootstrap/js/bootstrap.js" />
-	<h:outputScript name="/libs/bootstrap-datepicker/bootstrap-datetimepicker.js" />
+	<h:outputScript
+		name="/libs/bootstrap-datepicker/bootstrap-datetimepicker.js" />
 	<h:outputScript name="/libs/bootstrap/template/offcanvas.js" />
 </h:body>
 

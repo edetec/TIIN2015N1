@@ -105,7 +105,7 @@ public class EscursaoMb {
 					null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO, "Salvo",
 							"Salvo com sucesso."));
-			return "/escursoes";
+			return "/admin/escursoes";
 		} catch (IllegalArgumentException exception) {
 			exception.printStackTrace();
 			FacesContext.getCurrentInstance().addMessage(

@@ -33,4 +33,8 @@ public class UsuarioRN {
 		return dao.listarAgentes();
 	}
 
+	public Usuario buscarPorEmail(String email) {
+		return dao.buscarPorEmail(email);
+	}
+
 }

@@ -104,7 +104,7 @@ public class AlbumMb {
 
 			albumRN.adicionar(foto);
 
-			return "/album?idescursao=" + escursao.getId().toString()
+			return "/admin/album?idescursao=" + escursao.getId().toString()
 					+ "&faces-redirect=true";
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -10,7 +10,7 @@
 	<ui:define name="conteudo">
 		<div class="page-header">
 			<h1>Escursões</h1>
-			<h:link outcome="/escursao" styleClass="btn btn-success">
+			<h:link outcome="/admin/escursao" styleClass="btn btn-success">
 				<span class="glyphicon glyphicon-plus"></span>
 			</h:link>
 			<h:messages />
@@ -47,13 +47,13 @@
 					</h:column>
 					<h:column>
 						<span> <h:link styleClass="btn btn-default"
-								outcome="/album">
+								outcome="/admin/album">
 								<span class="glyphicon glyphicon-picture"></span>
 								<f:param name="idescursao" value="#{escursao.id}" />
 							</h:link>
 						</span>
 						<span> <h:link styleClass="btn btn-default"
-								outcome="/escursao">
+								outcome="/admin/escursao">
 								<span class="glyphicon glyphicon-pencil"></span>
 								<f:param name="id" value="#{escursao.id}" />
 							</h:link>

@@ -32,7 +32,7 @@
 			</div>
 		</div>
 		<div class="row">
-			<h:link outcome="/enviarfoto" styleClass="btn btn-success">
+			<h:link outcome="/admin/enviarfoto" styleClass="btn btn-success">
 				<f:param name="idescursao" value="#{albumMb.escursao.id}" />
 				<span class="glyphicon glyphicon-plus"></span>
 			</h:link>
@@ -49,7 +49,7 @@
 					</h:column>
 					<h:column>
 						<span> <h:link styleClass="btn btn-warning"
-								outcome="/enviarfoto">
+								outcome="/admin/enviarfoto">
 								<f:param name="idimagem" value="#{file.id}" />
 								<f:param name="idescursao" value="#{albumMb.escursao.id}" />
 
