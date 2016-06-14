@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/WEB-INF/template/padrao.xhtml">
+	<ui:define name="conteudo">
+		<div class="col-md-10">
+			<h:form styleClass="form-inline">
+				<div class="form-group">
+					<label for="inicio">Início</label>
+					<div class='input-group date datetimepicker'>
+					<h:inputText styleClass="form-control"
+						value="#{caixaEscursaoMb.inicio}">
+						<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+					</h:inputText>
+					<span class="input-group-addon"> <span
+						class="glyphicon glyphicon-calendar"></span>
+					</span>
+				</div>
+				</div>
+				<div class="form-group">
+					<label for="fim">Fim</label>
+					<div class='input-group date datetimepicker'>
+					<h:inputText styleClass="form-control"
+						value="#{caixaEscursaoMb.fim}">
+						<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+					</h:inputText>
+					<span class="input-group-addon"> <span
+						class="glyphicon glyphicon-calendar"></span>
+					</span>
+				</div>
+				</div>
+				<span>
+					<h:commandButton styleClass="btn btn-default"
+					 value="Buscar" action="#{caixaEscursaoMb.buscar}" />
+				</span>
+			</h:form>
+			<h:outputScript name="/js/datepicker-component.js" />
+			<h:dataTable styleClass="table table-striped"
+			 value="#{caixaEscursaoMb.caixasEscursao}" var="escursao">
+				<h:column>
+					<f:facet name="header">Destino</f:facet>
+					<h:outputText value="#{escursao.destino}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Data</f:facet>
+					<h:outputText value="#{escursao.data}">
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">Qtd Clientes</f:facet>
+					<h:outputText value="#{escursao.qtdClientes}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Total</f:facet>
+					<h:outputText value="#{escursao.total}">
+						<f:convertNumber currencySymbol="R$" type="currency" />
+					</h:outputText>
+				</h:column>
+			</h:dataTable>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>
