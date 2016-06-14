@@ -33,37 +33,43 @@ public class SessaoMb {
 		this.emailForm = emailForm;
 	}
 
-	public boolean estaLogado(){
+	public boolean estaLogado() {
 		return usuarioLogado != null;
 	}
-	
-	public boolean ehAdmin(){
-		return usuarioLogado != null && usuarioLogado.getPerfil().equals(Perfil.ADMIN);
+
+	public boolean ehAdmin() {
+		return usuarioLogado != null
+				&& usuarioLogado.getPerfil().equals(Perfil.ADMIN);
 	}
-	
-	public String getNomeUsuarioLogato(){
+
+	public String getNomeUsuarioLogato() {
 		return usuarioLogado == null ? "" : usuarioLogado.getNome();
 	}
-	
-	public String sair(){
+
+	public String sair() {
 		usuarioLogado = null;
 		return "/index?faces-redirect=true";
 	}
-	
-	public String entrar(){
+
+	public String entrar() {
 		UsuarioRN usuarioRN = new UsuarioRN();
-		Usuario usuario = usuarioRN.buscarPorEmail(emailForm);
 		
-		if(usuario == null ||
-				!usuario.getEmail().equalsIgnoreCase(emailForm) ||
-				!usuario.getSenha().equals(senhaForm)){
-			FacesContext.getCurrentInstance().addMessage(null, 
-					new FacesMessage("E-mail ou senha não confere."));
-			return "";
+		if (emailForm != null && !emailForm.isEmpty() 
+				&& senhaForm != null && !senhaForm.isEmpty()) {
+			
+			Usuario usuario = usuarioRN.buscarPorEmail(emailForm);
+
+			if (usuario != null
+					&& usuario.getEmail().equalsIgnoreCase(emailForm)
+					&& usuario.getSenha().equals(senhaForm)) {
+				usuarioLogado = usuario;
+
+				return "/admin/escursoes?faces-redirect=true";
+			}
 		}
-		
-		usuarioLogado = usuario;
-		
-		return "/admin/escursoes?faces-redirect=true";
+
+		FacesContext.getCurrentInstance().addMessage(null,
+				new FacesMessage("E-mail ou senha não confere."));
+		return "";
 	}
 }

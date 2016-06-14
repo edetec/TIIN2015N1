@@ -2,6 +2,7 @@ package br.senai.sc.ctai.ti20151n1.pwa.agtur.dao;
 
 import java.util.List;
 
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import br.senai.sc.ctai.ti20151n1.pwa.agtur.model.entity.Perfil;
@@ -28,23 +29,23 @@ public class UsuarioDAO extends DAO {
 	}
 
 	public List<Usuario> listarAgentes() {
-		Query query = getEM().createQuery("From Usuario u Where u.perfil = :perfil", Usuario.class);
+		Query query = getEM().createQuery(
+				"From Usuario u Where u.perfil = :perfil", Usuario.class);
 		query.setParameter("perfil", Perfil.AGENTE);
-		
+
 		return query.getResultList();
 	}
 
 	public Usuario buscarPorEmail(String email) {
-		Query query = getEM().createQuery("From Usuario u Where u.email = :email", Usuario.class);
+		Query query = getEM().createQuery(
+				"From Usuario u Where u.email = :email", Usuario.class);
 		query.setParameter("email", email);
-		return (Usuario) query.getSingleResult();
+		
+		try {
+			return (Usuario) query.getSingleResult();
+		} catch (NoResultException exceptio) {
+			return null;
+		}
 	}
-	
-	
-	
-	
-	
-	
-	
 
 }
